@@ -39,6 +39,7 @@ public class EditActivity extends AppCompatActivity {
                 data.setNoteContent(etContent.getText().toString());
                 int rowsAffected = dbh.updateNote(data);
                 dbh.close();
+                finish();
 
                 if (rowsAffected > 0) {
                     Toast.makeText(EditActivity.this, "Note updated successfully",
@@ -50,5 +51,16 @@ public class EditActivity extends AppCompatActivity {
                 }
             }
         });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbh = new DBHelper(EditActivity.this);
+                dbh.deleteNote(data.getId());
+                dbh.close();
+                finish();
+
+            }
+        });
+
     }
 }
